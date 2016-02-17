@@ -1,0 +1,57 @@
+% load volume data
+matVolume = volume_image;
+
+% initial Bone and Ventricle mat
+matBone = zeros(512,512,120);
+matVentricle = zeros(512,512,120);
+
+% filter by density bone = 1000~1400
+for i = 1:512
+    for j = 1:512
+        for k = 1:120
+            if matVolume(i,j,k) >950 && matVolume(i,j,k) < 1450
+                matBone(i,j,k) = 1;
+            end
+        end
+    end
+end
+
+% filter by ventricle = -5~5
+for i = 1:512
+    for j = 1:512
+        for k = 1:120
+            if matVolume(i,j,k) >-5 && matVolume(i,j,k) < 5
+                matVentricle(i,j,k) = 1;
+            end
+        end
+    end
+end
+
+% visualize bone and ventricle
+% pcshow
+
+% overlap volume calculation
+% [mat1, mat2] = maxOverlapVolume(mat1, mat2)
+
+for i = 1:512
+    for j = 1:512
+        for k = 1:120
+            if matBone(i,j,k) = 1
+                for ii = 1:512
+                    for jj = 1:512
+                        for kk = 1:120
+                            if matVentricle(ii,jj,kk) = 1
+                                if boolInCone(matBone(i,j,k),matVentricle(ii,jj,kk)) = 1
+                                    count = count + 1;
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+
+
