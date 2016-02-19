@@ -22,18 +22,18 @@ function [boolResult] = boolInCone(p1,p2)
 % orth_distance = length((p - x) - cone_dist * dir)
 % 
 % is_point_inside_cone = (orth_distance < cone_radius)
-boolResult = 0;
 x = p1;
 p = p2;
 h = 52;
 r = 23;
 dir = p2-p1;
 cone_dist = dot(p - x, dir);
-cone_radius = (cone_dist / h) * r; % height is less than 7cm which is 52 pixels space % r is calculated by triangular model, 
-orth_distance = length((p - x) - cone_dist * dir);
-if orth_distance < cone_radius
-    boolResult = 1;
-end
+cone_radius = (cone_dist / h) * r; 
+% height is less than 7cm which is 52 pixels space
+% r is calculated by triangular model, 
+orth_distance = length((p - x) - cone_dist * dir)
+is_point_inside_cone = (orth_distance < cone_radius)
+
 
 
 end
